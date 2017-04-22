@@ -386,12 +386,25 @@ public class WMethod{
    }// End of main()
    public static void iterateThroughList(Vector <String> s)
    {
+	   boolean stateTrue = true;
 	   String separator = " ";
 	   String fullString;
 	   for(int i = 0; i < s.size(); i++)
 	   {
 		   fullString = s.get(i).replace("", " ");
-		   Utilities.runFSM(FSM, startState, fullString, separator);
+		   stateTrue = Utilities.runFSM(FSM, startState, fullString, separator);
+		   System.out.println("@Test \npublic void testCase" + (i + 1) + "()");
+		   System.out.println("{");
+		   if(stateTrue)
+		   {
+			   System.out.println("\tassertTrue(jamesBond.bondRegex(\"" + fullString + "\"));");
+		   }
+		   else
+		   {
+			   System.out.println("\tassertFalse(jamesBond.bondRegex(\"" + fullString + "\"));");
+		   }
+		   System.out.println("}");
+		   System.out.println();
 	   }
    }
 }//End of class WMethod
